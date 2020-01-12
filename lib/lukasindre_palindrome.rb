@@ -1,5 +1,6 @@
 require "lukasindre_palindrome/version"
-class String
+
+module LukasindrePalindrome
 
   # Returns true for a palindrome, false otherwise.
   def palindrome?
@@ -8,13 +9,22 @@ class String
 
   # Returns the letters in the string.
   def letters
-    self.chars.select { |c| c.match(/[a-z]/i) }.join
+    self.chars.select { |c| c.match(/[a-z0-9]/i) }.join
   end
 
   private
 
     # Returns content for palindrome testing.
     def processed_content
-      self.scan(/[a-z]/i).join.downcase
+      self.to_s.scan(/[a-z0-9]/i).join.downcase
     end
 end
+
+class String
+  include LukasindrePalindrome
+end
+
+class Integer
+  include LukasindrePalindrome
+end
+
